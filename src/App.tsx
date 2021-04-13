@@ -3,15 +3,22 @@ import { Provider, useDispatch } from "react-redux";
 import { configureStore } from '@reduxjs/toolkit'
 import { taskMiddleware } from "react-palm/tasks";
 
-import KeplerGl from "kepler.gl";
-import { addDataToMap } from "kepler.gl/actions";
-import keplerGlReducer from "kepler.gl/reducers";
+/**
+ * I hoped I could reference the KeplerGl import from public/index.html
+ * UMD script tag like in this example:
+ * https://github.com/keplergl/kepler.gl/blob/master/examples/umd-client/index.html
+ * but I get this:
+ *   Line 66:6:  'KeplerGl' is not defined  react/jsx-no-undef
+ */
+// import KeplerGl from "kepler.gl";
+// import { addDataToMap } from "kepler.gl/actions";
+// import keplerGlReducer from "kepler.gl/reducers";
 
 import useSwr from "swr";
 
 const store = configureStore({
   reducer: {
-    keplerGl: keplerGlReducer
+    keplerGl: KeplerGl.keplerGlReducer
   },
   middleware: [taskMiddleware]
 })
@@ -37,7 +44,7 @@ function Map() {
   React.useEffect(() => {
     if (data) {
       dispatch(
-        addDataToMap({
+        KeplerGl.addDataToMap({
           datasets: {
             info: {
               label: "COVID-19",
