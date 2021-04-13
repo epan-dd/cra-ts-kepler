@@ -1,8 +1,27 @@
 import React from 'react';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider, useDispatch } from "react-redux";
+// import { configureStore } from '@reduxjs/toolkit'
+
 import logo from './logo.svg';
 import './App.css';
 
+const reducer = (prevState: any, action: any) => ({})
+const reducers = combineReducers({
+  keplerGl: reducer,
+})
+
+const store = createStore(reducers, {})
+
 function App() {
+  return (
+    <Provider store={store}>
+      <Thingy />
+    </Provider>
+  )
+}
+
+function Thingy() {
   return (
     <div className="App">
       <header className="App-header">
