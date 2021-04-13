@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider, useDispatch } from "react-redux";
-// import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 
 import logo from './logo.svg';
 import './App.css';
@@ -11,7 +11,12 @@ const reducers = combineReducers({
   keplerGl: reducer,
 })
 
-const store = createStore(reducers, {})
+// const store = createStore(reducers, {})
+const store = configureStore({
+  reducer: {
+    keplerGl: reducer
+  }
+})
 
 function App() {
   return (
